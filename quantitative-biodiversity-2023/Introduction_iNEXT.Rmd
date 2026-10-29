@@ -1,0 +1,154 @@
+---
+title: "Measuring biodiversity: Coverage and hill numbers"
+date: "13 December 2022"
+output: 
+  pdf_document: 
+    number_sections: yes
+    toc: yes
+---
+# Equalizing samples with coverage
+
+Many study designs include equal effort sampling to compare diversity across communities, however, it partly determines the true species abundance of a community. For instance, a small sample is more likely to contain a few common species by chance (Gotelli and Colwell 2001). Ecologists standardize samples with sample size, for example, by removal of individuals from larger samples to equalize the number of individuals (rarefaction). Rarefaction does still not account for the distribution of relative abundances in a larger community. Since diverse communities contain both rare and common species, they require more sampling effort. Therefore, standardization might underestimate the true diversity of communities (Chao and Jost 2012).
+
+Coverage is the fairest available theoretical method that describes how well a sample captures the true diversity of the whole community, considering that diverse communities need more sampling effort than others. It was introduced in the 1940s by computer scientist Alan Turing but was recently introduced in ecology as a standardization method (Jost 2010, Chao and Jost 2012, Chao et al. 2014) including species that have not yet been detected. More precisely, coverage estimates the proportion of individuals that belong to species present in the sample. If the next individual is an already found species, the species accumulation curve moves horizontally with a slope of 0, if it is a new species the curve goes up one step up with a slope of 1. Coverage as a function of sampling size increases slower when more species are detected. 
+
+$$\displaystyle C = 1-\frac{f_1}{n}\left[ \frac{(n-1)f_1}{(n-1)f_1+f_2} \right]$$
+There is simply three parameters are needed to estimate coverage:
+$f_1$ , the number of singletons
+$f_2$ , the number of doubletons
+$n$ , the number of individuals.
+
+# Hill numbers
+
+Richness measurements, even the best asymptotic estimators such as Chao are sensitive to sampling effort, relative abundance, and standardization methods. Traditional diversity indices explicitly include relative abundances (Magurran and McGill 2011), such as the Shannon (Shannon and Weaver 1963) and Simpson (Simpson 1949) indices. Although they are more robust to the uncertainty, these indices have different units and do not scale intuitively with species gain or loss. Hill numbers are developed by Hill (1973) and reintroduced to ecology by Jost (2006). This metric is only one equation and so a way to estimate generalized mean species rarity. We can define the generalized equation of hill diversity as:
+
+$$\displaystyle H_q=\frac{1}{1-q}log\sum_{n=1}^{S}p_i^q$$
+Where the q exponent is the order in which the index is dependent of rare species. Hill numbers will be then $N_q=exp(Hq)$. Here are the commonly used exponents and and their relationship with traditional indices:
+
+| Hill Diversity | Equivalent index | Derivation | Simplification | Meaning |
+|--|--|---|---|---|
+| Hill- Richness | Richness | $H_0=exp(S)$ | $N_0=S$ | $q=0$ is the arithmetic mean of rarity |
+| Hill- Shannon | Exponential  Shannon  entropy | $H_1=\sum_{i=1}^{S}{p_i}{logp_1}$ | $N_1=exp(H_1)$ | $q=1$ is the geometric mean rarity |
+| Hill- Simpson | Inverse Simpson index | $H_2=-log\sum_{i=1}^{S}{p_i}^{2}$ | $N_2=1/\sum_{i=1}^{S}{p_i}^{2}$ | $q=2$ is the harmonic mean rarity |      |         |
+
+# Extrapolation
+
+Standardization by coverage might be better than traditional rarefaction, yet both are lacking confidence intervals and are sensitive to sample completeness. Extrapolation extends the pattern of species detection to greater sample size, effort, or coverage than the estimations based on the available data. Although still not fully established, the newest methods combine diversity measures and sample coverage to estimate uncertainty around alpha diversity (Roswell et al. 2021).
+
+# Excersize
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+## Loading the relevant packages
+
+Here we install iNEXT package to explore Hill diversity and extrapolation. We will use mobsim package for simulating communities to practice. 
+
+
+```{r, eval = FALSE}
+install.packages("iNEXT")
+
+# Development version from GitHub:
+install.packages("devtools")
+devtools::install_github("MoBiodiv/mobsim", build_vignettes = TRUE)
+```
+
+
+```{r}
+library(iNEXT)
+library(mobsim)
+```
+
+## Simulate even and uneven communities
+
+We will simulate communities with random spatial positions. Here species abundance distribution is lognormal. To simulate even and uneven communities we can use 0 and 1 standard deviation of the realative abundances in the species pool.
+
+```{r}
+# Even community
+com1 <- sim_poisson_community(s_pool = 100, n_sim = 1000, sad_type = "lnorm",
+                              sad_coef = list("sdlog" = 0))
+plot(com1)
+
+# Uneven community
+com2 <- sim_poisson_community(s_pool = 100, n_sim = 1000, sad_type = "lnorm",
+                             sad_coef = list("sdlog" = 1))
+
+plot(com2)
+```
+
+## Take samples from source communities spatially-explicit census
+
+This function simulates plot-based sampling. We will randomly sample four sites from the source communities we simulated.
+
+```{r}
+comm_mat1    <- sample_quadrats(com1, n_quadrats = 4,
+quadrat_area = 0.08, method = "random", avoid_overlap = T) 
+
+comm_mat2    <- sample_quadrats(com2, n_quadrats = 4,
+quadrat_area = 0.08, method = "random", avoid_overlap = T) 
+```
+
+## Graphical exploration
+
+Here we will estimate and extrapolate Hill diversity after removing the 0 abundances. 
+
+```{r, warning = FALSE}
+data1       <- t(comm_mat1$spec_dat)
+data1.clean <- data1[, colSums(data1 != 0) > 0]
+out1        <- iNEXT(data1.clean, q=c(0, 1, 2), datatype="abundance", endpoint=300, nboot = 50)
+
+data2       <- t(comm_mat2$spec_dat)
+data2.clean <- data2[, colSums(data2 != 0) > 0]
+out2        <- iNEXT(data2.clean, q=c(0, 1, 2), datatype="abundance", endpoint=300, nboot = 50)
+
+```
+
+### Hill diversity
+
+Exponent q = 0-3 represent richness, exponential Shannon and inverse Simpson indices. 
+
+```{r, fig.width = 10, fig.height = 5}
+ggiNEXT(out1, type=1, color.var="Order.q", facet.var="Assemblage")
+ggiNEXT(out2, type=1, color.var="Order.q", facet.var="Assemblage")
+```
+
+### Number of individuals vs. coverage
+
+How well the diversity is covered in our samples?
+
+```{r,fig.width = 10, fig.height = 5}
+ggiNEXT(out1, type = 2, color.var="Order.q", facet.var="Assemblage")
+ggiNEXT(out2, type = 2, color.var="Order.q", facet.var="Assemblage")
+```
+
+### Standardization by coverage
+
+Can we standardize our samples using sample coverage? 
+
+```{r, fig.width = 10, fig.height = 5}
+ggiNEXT(out1, type = 3, color.var="Order.q", facet.var="Assemblage")
+ggiNEXT(out2, type = 3, color.var="Order.q", facet.var="Assemblage")
+```
+
+# References
+
+Chao, A. and Jost, L. 2012. Coverage-based rarefaction and extrap-olation: standardizing samples by completeness rather than size. – Ecology 93: 2533–2547.
+
+Chao,  A.  et  al.  2014a.  Rarefaction  and  extrapolation  with  Hill  numbers:  a  framework  for sampling  and  estimation  in  species  diversity studies. – Ecol. Monogr. 84: 45–67.
+
+Gotelli,  N.  J.  and  Colwell,  R.  K.  2001.  Quantifying  biodiversity:  procedures and pitfalls in the measurement and comparison of species richness. – Ecol. Lett. 4: 379–391.
+
+Jost, L. 2006. Entropy and diversity. – Oikos 113: 363–375.
+
+Jost, L. 2010. The relation between evenness and diversity. – Diversity 2: 207–232.
+
+Hill, M. O. 1973. Diversity and evenness: a unifying notation and its consequences. – Ecology 54: 427–432.
+
+Magurran, A. E. and McGill, B. J. 2011. Biological diversity: fron-tiers in measurement and assessment. – Oxford Univ. Press.
+
+Shannon, C. E. and Weaver, W. 1963. The mathematical theory of communication. – Univ. Illinois Press 5: 1–131.
+
+Simpson,  E.  H.  1949.  Measurement  of  diversity.  –  Nature  163:  688–688.
+
+Roswell, M., Dushoff, J., & Winfree, R. 2021. A conceptual guide to measuring species diversity.  – Oikos 130: 321–338. 

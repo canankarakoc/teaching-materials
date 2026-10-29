@@ -1,0 +1,97 @@
+﻿Well;SampleID;Sample_line;Treatment;Phage_line;Local_line
+A01;s02;Phage absent;alone;NA;NA
+A02;s02;Phage absent;alone;NA;NA
+A03;s02;Phage absent;alone;NA;NA
+A04;s02+PA;Phage absent;with phage;past;ancestral
+A05;s02+PA;Phage absent;with phage;past;ancestral
+A06;s02+PA;Phage absent;with phage;past;ancestral
+A07;blank;NA;NA;NA;NA
+A08;blank;NA;NA;NA;NA
+A09;blank;NA;NA;NA;NA
+A10;blank;NA;NA;NA;NA
+A11;blank;NA;NA;NA;NA
+A12;blank;NA;NA;NA;NA
+B01;s03;Phage absent;alone;NA;NA
+B02;s03;Phage absent;alone;NA;NA
+B03;s03;Phage absent;alone;NA;NA
+B04;s03+PA;Phage absent;with phage;past;ancestral
+B05;s03+PA;Phage absent;with phage;past;ancestral
+B06;s03+PA;Phage absent;with phage;past;ancestral
+B07;s33+P33;Phage present;with phage;contemporary;sympatric
+B08;s33+P33;Phage present;with phage;contemporary;sympatric
+B09;s33+P33;Phage present;with phage;contemporary;sympatric
+B10;s33+P34;Phage present;with phage;contemporary;allopatric
+B11;s33+P34;Phage present;with phage;contemporary;allopatric
+B12;s33+P34;Phage present;with phage;contemporary;allopatric
+C01;s04;Phage absent;alone;NA;NA
+C02;s04;Phage absent;alone;NA;NA
+C03;s04;Phage absent;alone;NA;NA
+C04;s04+PA;Phage absent;with phage;past;ancestral
+C05;s04+PA;Phage absent;with phage;past;ancestral
+C06;s04+PA;Phage absent;with phage;past;ancestral
+C07;s34+P34;Phage present;with phage;contemporary;sympatric
+C08;s34+P34;Phage present;with phage;contemporary;sympatric
+C09;s34+P34;Phage present;with phage;contemporary;sympatric
+C10;s33+P35;Phage present;with phage;contemporary;allopatric
+C11;s33+P35;Phage present;with phage;contemporary;allopatric
+C12;s33+P35;Phage present;with phage;contemporary;allopatric
+D01;s33;Phage present;alone;NA;NA
+D02;s33;Phage present;alone;NA;NA
+D03;s33;Phage present;alone;NA;NA
+D04;s33+PA;Phage present;with phage;past;ancestral
+D05;s33+PA;Phage present;with phage;past;ancestral
+D06;s33+PA;Phage present;with phage;past;ancestral
+D07;s35+P35;Phage present;with phage;contemporary;sympatric
+D08;s35+P35;Phage present;with phage;contemporary;sympatric
+D09;s35+P35;Phage present;with phage;contemporary;sympatric
+D10;s34+P33;Phage present;with phage;contemporary;allopatric
+D11;s34+P33;Phage present;with phage;contemporary;allopatric
+D12;s34+P33;Phage present;with phage;contemporary;allopatric
+E01;s34;Phage present;alone;NA;NA
+E02;s34;Phage present;alone;NA;NA
+E03;s34;Phage present;alone;NA;NA
+E04;s34+PA;Phage present;with phage;past;ancestral
+E05;s34+PA;Phage present;with phage;past;ancestral
+E06;s34+PA;Phage present;with phage;past;ancestral
+E07;Ancestor+P33;Ancestral ;with phage;contemporary;NA
+E08;Ancestor+P33;Ancestral ;with phage;contemporary;NA
+E09;Ancestor+P33;Ancestral ;with phage;contemporary;NA
+E10;s34+P35;Phage present;with phage;contemporary;allopatric
+E11;s34+P35;Phage present;with phage;contemporary;allopatric
+E12;s34+P35;Phage present;with phage;contemporary;allopatric
+F01;s35;Phage present;alone;NA;NA
+F02;s35;Phage present;alone;NA;NA
+F03;s35;Phage present;alone;NA;NA
+F04;s35+PA;Phage present;with phage;past;ancestral
+F05;s35+PA;Phage present;with phage;past;ancestral
+F06;s35+PA;Phage present;with phage;past;ancestral
+F07;Ancestor+P34;Ancestral ;with phage;contemporary;NA
+F08;Ancestor+P34;Ancestral ;with phage;contemporary;NA
+F09;Ancestor+P34;Ancestral ;with phage;contemporary;NA
+F10;s35+P33;Phage present;with phage;contemporary;allopatric
+F11;s35+P33;Phage present;with phage;contemporary;allopatric
+F12;s35+P33;Phage present;with phage;contemporary;allopatric
+G01;blank;NA;NA;NA;NA
+G02;blank;NA;NA;NA;NA
+G03;blank;NA;NA;NA;NA
+G04;blank;NA;NA;NA;NA
+G05;blank;NA;NA;NA;NA
+G06;blank;NA;NA;NA;NA
+G07;Ancestor+P35;Ancestral ;with phage;contemporary;NA
+G08;Ancestor+P35;Ancestral ;with phage;contemporary;NA
+G09;Ancestor+P35;Ancestral ;with phage;contemporary;NA
+G10;s35+P34;Phage present;with phage;contemporary;allopatric
+G11;s35+P34;Phage present;with phage;contemporary;allopatric
+G12;s35+P34;Phage present;with phage;contemporary;allopatric
+H01;Ancestor;Ancestral ;alone;NA;NA
+H02;Ancestor;Ancestral ;alone;NA;NA
+H03;Ancestor;Ancestral ;alone;NA;NA
+H04;Ancestor+PA;Ancestral ;with phage;past;ancestral
+H05;Ancestor+PA;Ancestral ;with phage;past;ancestral
+H06;Ancestor+PA;Ancestral ;with phage;past;ancestral
+H07;Ancestor+P33;Ancestral ;with phage;contemporary;NA
+H08;Ancestor+P33;Ancestral ;with phage;contemporary;NA
+H09;Ancestor+P33;Ancestral ;with phage;contemporary;NA
+H10;blank;NA;NA;NA;NA
+H11;blank;NA;NA;NA;NA
+H12;blank;NA;NA;NA;NA

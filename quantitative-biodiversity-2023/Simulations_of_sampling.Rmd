@@ -1,0 +1,143 @@
+---
+title: "Simulated communities & sampling for the jelly excersize"
+date: "25 January 2023"
+output:
+  pdf_document:
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 6, fig.height = 6)
+```
+
+```{r message=FALSE}
+#install.packages("mobsim")
+#install.packages("iNEXT")
+library(mobsim)
+library(vegan)
+library(tidyverse)
+library(iNEXT)
+```
+
+## Simulate an even and an uneven community with random spatial positions
+
+```{r}
+# Even community
+set.seed(42)
+com1 <- sim_poisson_community(s_pool = 30, n_sim = 500, sad_type = "lnorm",
+                              sad_coef = list("sdlog" = 0))
+plot(com1)
+
+# Uneven community
+com2 <- sim_poisson_community(s_pool = 30, n_sim = 500, sad_type = "lnorm",
+                             sad_coef = list("sdlog" = 1))
+
+plot(com2)
+```
+
+
+```{r}
+# Real diversity 
+
+# Community 1
+
+count1 <- com1$census %>% 
+  group_by(species) %>% 
+  summarize(count = as.numeric(length(species))) %>% 
+  column_to_rownames(var = "species")
+
+count.t <- t(count1)
+
+# Diversity
+exp(diversity(count.t, "shannon"))
+(diversity(count.t, "invsimpson"))
+
+# Community 2
+
+count2 <- com2$census %>% 
+  group_by(species) %>% 
+  summarize(count = as.numeric(length(species))) %>% 
+  column_to_rownames(var = "species")
+
+count2.t <- t(count2)
+
+# Diversity
+exp(diversity(count2.t, "shannon"))
+(diversity(count2.t, "invsimpson"))
+
+```
+
+## Take samples from source communities spatially-explicit census
+
+```{r}
+comm_mat1    <- sample_quadrats(com1, n_quadrats = 4,
+quadrat_area = 0.08, method = "random", avoid_overlap = T) 
+
+comm_mat2    <- sample_quadrats(com2, n_quadrats = 4,
+quadrat_area = 0.08, method = "random", avoid_overlap = T) 
+```
+
+## Graphical exploration
+
+```{r, warning = FALSE}
+data1       <- t(comm_mat1$spec_dat)
+data1.clean <- data1[, colSums(data1 != 0) > 0]
+out1        <- iNEXT(data1.clean, q=c(0, 1, 2), datatype="abundance", endpoint = 100, nboot = 50)
+
+data2       <- t(comm_mat2$spec_dat)
+data2.clean <- data2[, colSums(data2 != 0) > 0]
+out2        <- iNEXT(data2.clean, q=c(0, 1, 2), datatype="abundance", endpoint = 100, nboot = 50)
+
+```
+
+### Hill diversity
+
+```{r, fig.width = 10, fig.height = 5}
+ggiNEXT(out1, type=1, color.var="Order.q", facet.var="Assemblage")
+ggiNEXT(out2, type=1, color.var="Order.q", facet.var="Assemblage")
+```
+
+### Number of individuals vs. coverage
+
+```{r,fig.width = 10, fig.height = 5}
+ggiNEXT(out1, type = 2, color.var="Order.q", facet.var="Assemblage")
+ggiNEXT(out2, type = 2, color.var="Order.q", facet.var="Assemblage")
+```
+
+### Standardization by coverage
+
+```{r, fig.width = 10, fig.height = 5}
+ggiNEXT(out1, type = 3, color.var="Order.q", facet.var="Assemblage")
+ggiNEXT(out2, type = 3, color.var="Order.q", facet.var="Assemblage")
+```
+
+
+```{r}
+# Print data to construct jelly communities 
+count1
+count2
+```
+
+## Beta diversity 
+
+```{r}
+combined_data <- comm_mat1$spec_dat %>%
+  bind_rows(comm_mat2$spec_dat) %>%
+  replace(is.na(.), 0)
+
+com.structure   <- metaMDS(combined_data[,1:30], distance = "bray")
+spp.scores      <- as.data.frame(scores(com.structure)$sites)
+
+spp.scores.data <- spp.scores %>%
+  mutate(community = rep(c("community1", "community2"), each = 4)) %>%
+  mutate(sites = rep(c("site1", "site2", "site3", "site4"), times = 2))
+
+ggplot(spp.scores.data, aes(x = NMDS1, y = NMDS2, shape = community, color = sites))+
+  geom_point(size = 6)+
+  theme_bw()
+
+
+
+```
+
+

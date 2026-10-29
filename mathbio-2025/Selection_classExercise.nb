@@ -1,0 +1,208 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7748,        200]
+NotebookOptionsPosition[      7082,        181]
+NotebookOutlinePosition[      7480,        197]
+CellTagsIndexPosition[      7437,        194]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9518198925903482`*^9, 
+  3.951819924372418*^9}},ExpressionUUID->"6704babf-c04e-4954-94b2-\
+817802bb887f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"p", ",", "data"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"p", "[", "0", "]"}], "=", "p0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"p", "[", "t_", "]"}], ":=", 
+        RowBox[{
+         RowBox[{"p", "[", "t", "]"}], "=", 
+         RowBox[{
+          RowBox[{"p", "[", 
+           RowBox[{"t", "-", "1"}], "]"}], " ", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1", "+", "s"}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", 
+             RowBox[{"s", " ", 
+              RowBox[{"p", "[", 
+               RowBox[{"t", "-", "1"}], "]"}]}]}], ")"}]}]}]}]}], ";", 
+       RowBox[{"(*", 
+        RowBox[{"recursive", " ", "definition"}], "*)"}], 
+       RowBox[{"data", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"t", ",", 
+            RowBox[{"p", "[", "t", "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "maxGen"}], "}"}]}], "]"}]}], ";", 
+       RowBox[{"(*", 
+        RowBox[{"generate", " ", "table"}], "*)"}], 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"data", ",", 
+            RowBox[{"Joined", "->", "True"}], ",", 
+            RowBox[{"PlotRange", "->", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"AxesLabel", "->", 
+             RowBox[{"{", 
+              RowBox[{
+              "\"\<Generation\>\"", ",", "\"\<Frequency of Allele A\>\""}], 
+              "}"}]}], ",", 
+            RowBox[{
+            "PlotLabel", "->", 
+             "\"\<Change in Allele A Frequency Over Time (Haploid \
+Selection)\>\""}], ",", 
+            RowBox[{"ImageSize", "->", "Large"}]}], "]"}], ",", 
+          RowBox[{"Grid", "[", 
+           RowBox[{
+            RowBox[{"Prepend", "[", 
+             RowBox[{"data", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Generation\>\"", ",", "\"\<p\>\""}], "}"}]}], 
+             "]"}], ",", 
+            RowBox[{"Frame", "->", "All"}]}], "]"}]}], "}"}], "]"}]}]}], 
+     "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "p0", ",", "0.01", ",", "\"\<Initial frequency (p\:2080)\>\""}], "}"}],
+       ",", "0", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"s", ",", "0.02", ",", "\"\<Selection coefficient (s)\>\""}], 
+       "}"}], ",", "0", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"maxGen", ",", "50", ",", "\"\<Number of generations\>\""}], 
+       "}"}], ",", "10", ",", "500", ",", "10"}], "}"}]}], "]"}], 
+  "\n"}]], "Input",
+ CellChangeTimes->{{3.951819931164524*^9, 3.951819931172188*^9}, 
+   3.951821691749295*^9, 3.951821785042817*^9},
+ CellLabel->"In[5]:=",ExpressionUUID->"a95e4482-d788-4d88-8009-9b83d595d5a3"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`maxGen$$ = 500, $CellContext`p0$$ = 
+    0.01, $CellContext`s$$ = 0.02, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p0$$], 0.01, "Initial frequency (p\:2080)"}, 0, 1}, {{
+       Hold[$CellContext`s$$], 0.02, "Selection coefficient (s)"}, 0, 1}, {{
+       Hold[$CellContext`maxGen$$], 50, "Number of generations"}, 10, 500, 
+      10}}, Typeset`size$$ = {576., {4693.634033203125, 4699.365966796875}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`maxGen$$ = 50, $CellContext`p0$$ = 
+        0.01, $CellContext`s$$ = 0.02}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`p$, $CellContext`data$}, $CellContext`p$[
+          0] = $CellContext`p0$$; $CellContext`p$[
+           Pattern[$CellContext`t$, 
+            
+            Blank[]]] := ($CellContext`p$[$CellContext`t$] = \
+$CellContext`p$[$CellContext`t$ - 1] ((1 + $CellContext`s$$)/(
+            1 + $CellContext`s$$ $CellContext`p$[$CellContext`t$ - 
+               1]))); $CellContext`data$ = Table[{$CellContext`t, 
+            $CellContext`p$[$CellContext`t]}, {$CellContext`t, 
+            0, $CellContext`maxGen$$}]; Column[{
+           
+           ListPlot[$CellContext`data$, Joined -> True, PlotRange -> {0, 1}, 
+            AxesLabel -> {"Generation", "Frequency of Allele A"}, PlotLabel -> 
+            "Change in Allele A Frequency Over Time (Haploid Selection)", 
+            ImageSize -> Large], 
+           Grid[
+            Prepend[$CellContext`data$, {"Generation", "p"}], Frame -> 
+            All]}]], 
+      "Specifications" :> {{{$CellContext`p0$$, 0.01, 
+          "Initial frequency (p\:2080)"}, 0, 
+         1}, {{$CellContext`s$$, 0.02, "Selection coefficient (s)"}, 0, 
+         1}, {{$CellContext`maxGen$$, 50, "Number of generations"}, 10, 500, 
+         10}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{620., {4768., 4773.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.951819953071075*^9, 3.951821697433629*^9, 
+  3.9518217918189583`*^9, 3.952004312600033*^9},
+ CellLabel->"Out[5]=",ExpressionUUID->"b9814831-9545-4042-b4f2-017e106aef34"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.952004182650085*^9, 
+  3.952004185348034*^9}},ExpressionUUID->"19c784ad-3116-4008-bad4-\
+a209c384aef8"]
+},
+WindowSize->{1920, 970},
+WindowMargins->{{0, Automatic}, {Automatic, -180}},
+FrontEndVersion->"13.0 for Mac OS X x86 (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"7a1c439f-a29f-4f8e-96ff-5764e2a9a3bb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 154, 3, 30, "Input",ExpressionUUID->"6704babf-c04e-4954-94b2-817802bb887f"],
+Cell[CellGroupData[{
+Cell[737, 27, 3078, 85, 136, "Input",ExpressionUUID->"a95e4482-d788-4d88-8009-9b83d595d5a3"],
+Cell[3818, 114, 3093, 59, 9560, "Output",ExpressionUUID->"b9814831-9545-4042-b4f2-017e106aef34"]
+}, Open  ]],
+Cell[6926, 176, 152, 3, 30, "Input",ExpressionUUID->"19c784ad-3116-4008-bad4-a209c384aef8"]
+}
+]
+*)
+

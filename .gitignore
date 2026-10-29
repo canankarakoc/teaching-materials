@@ -1,0 +1,16 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+Rplots.pdf
+
+# macOS
+.DS_Store
+
+# Plots the experimental-evolution scripts save
+experimental-evolution-2020/**/*.pdf
+
+# Answer keys stay private
+*AnswerKey*
+*answer_key*
