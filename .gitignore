@@ -9,7 +9,8 @@ Rplots.pdf
 .DS_Store
 
 # Plots the experimental-evolution scripts save
-experimental-evolution-2020/**/*.pdf
+experimental-evolution-2020/competition/*.pdf
+experimental-evolution-2020/growth/*.pdf
 
 # Answer keys stay private
 *AnswerKey*

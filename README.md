@@ -17,8 +17,8 @@ Students sample gummy-candy "communities" of different sizes, then calculate div
 
 BSc Biology, module 11-BIO-0630 (Environmental Microbiology), run at UFZ. Students compete evolved *E. coli* clones against their ancestor and measure growth and phage infectivity, to estimate the fitness costs of resistance.
 
-- `Practical_training_protocol_2020.docx`: course protocol with the two-week schedule, background, methods and media recipes
-- `Measuring_fitness_costs.docx`: background and methods
+- `Practical_training_protocol_2020` (PDF and Word): course protocol with the two-week schedule, background, methods and media recipes
+- `Measuring_fitness_costs` (PDF and Word): background and methods
 - `competition/class.R`: in-class walk-through of the competition data
 - `competition/fitness_costs.R`: selection coefficients and relative fitness
 - `growth/class_14.05.R`: growth-curve fitting (`growthrates`)
@@ -34,8 +34,8 @@ My contributions to the course: sample coverage and Hill numbers, and a gummy-ca
 
 ### BIOL 3400, Georgia Institute of Technology (2025) · `mathbio-2025/`
 
-- `Probability2_Bayes_worksheet.docx`: Bayes' theorem with diagnostic tests (HIV testing, sequential updating, mammography)
-- `Beans_coins_dice_activity.docx`: students build a 2×2 diagnostic table by hand, using beans for disease status and a coin and a die as the test
+- `Probability2_Bayes_worksheet` (PDF and Word): Bayes' theorem with diagnostic tests (HIV testing, sequential updating, mammography)
+- `Beans_coins_dice_activity` (PDF and Word): students build a 2×2 diagnostic table by hand, using beans for disease status and a coin and a die as the test
 - `sequential_updating.nb`: sequential Bayesian updating (Mathematica)
 - `Selection_classExercise.nb`: allele frequency change under haploid selection (Mathematica)
 - `SIR_simulation.R`: SIR epidemic model (`deSolve`)
