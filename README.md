@@ -9,6 +9,7 @@ Hands-on activities, worksheets and R scripts I designed for courses in ecology,
 Students sample gummy-candy "communities" of different sizes, then calculate diversity indices on their counts and on 18S fingerprinting (T-RFLP) data from the course.
 
 - `diversity_exercise.R`: richness, Shannon and Simpson diversity and their Hill-number forms, relative abundances and NMDS ordination (`vegan`)
+- `gummy_species_key.pdf`: species key for the gummy candies
 - `HariboMatrix.csv`: gummy counts per community and sample size
 - `ClusBinMatrix_B_3_Praktikum_18S.txt`: 18S T-RFLP fragment matrix
 
